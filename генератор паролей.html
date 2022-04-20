@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="form">
+            <input type="number" placeholder="Длина пароля" id="pass_length">
+            <input type="number" placeholder="Количество паролей" id="pass_number">
+            <button id="button">Сгенерировать</button>
+        </div>
+    
+        <h3>Результат</h3>
+        <div id="result"></div>
+    </div>
+
+   
+
+
+<script>
+jQuery.noConflict()(function ($) {
+$(document).ready(function() {
+
+    
+    function generate_passwords(_lenght, _number) {
+        const symbols = '1234567890abcdefghijklmnopqrstuywxyz';
+        const symbols_array = symbols.split('');
+        const number_of_symbols = symbols.length;
+        
+        let result_array = [];
+        let result = "";
+        let target = $("#result");
+            
+
+        for (let a = 0; a < _number; a++) {
+            let password = "";
+            for (let b = 0; b < _lenght; b++) {
+                let rand = Math.floor(Math.random() * number_of_symbols);
+                password += symbols_array[rand];
+            }
+            result_array.push(password);
+        }
+
+
+        result_array.forEach(function(item, i, result_array) {
+            result += "<p>"+item+"</p>";
+        });
+        
+        target.html(result);
+    }
+
+
+
+
+    $("#button").click(function() {
+        let _length = $("#pass_length").val();
+        let _number = $("#pass_number").val();
+
+        generate_passwords(_length,_number);
+    });
+
+    
+
+});
+});
+</script>
+
+
+<style> 
+    body {
+        background: #c8d6e5;
+    }
+    .wrapper {
+        width: 500px;
+        margin: 50px auto;
+        padding: 50px;
+        background: #222f3e;
+        color: #fff;
+    }
+
+    .form {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+    }
+
+    .form > * {
+        flex-basis: 30%;
+        box-sizing: border-box;
+
+        max-width: none;
+        overflow: hidden;
+        text-align: center;
+        line-height: 50px;
+        padding: 0;
+        border-radius: 5px;
+    }
+
+    input {
+        background: #ccc;
+        outline: none;
+        border: 0;
+        box-sizing: border-box;
+        -webkit-appearance: none;
+        
+    }
+
+    button {
+        background: #ff7600;
+        border: 0;
+        color: #fff;
+        font-weight: 700;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+
+    input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+</style>
+
+
+    
+</body>
+</html>
